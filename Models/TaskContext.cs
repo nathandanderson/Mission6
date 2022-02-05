@@ -39,7 +39,7 @@ namespace Mission6.Models
                 {
                     TaskID = 2,
                     TaskName = "Laundry",
-                    DueDate = '02/12/22',
+                    DueDate = "02/12/22",
                     Quadrant = 3,
                     CategoryID = 1,
                     Completed = false
@@ -49,7 +49,7 @@ namespace Mission6.Models
                 {
                     TaskID = 3,
                     TaskName = "Respond to emails",
-                    DueDate = 'None',
+                    DueDate = "None",
                     Quadrant = 4,
                     CategoryID = 1,
                     Completed = false
@@ -59,7 +59,7 @@ namespace Mission6.Models
                 {
                     TaskID = 4,
                     TaskName = "Relationship Building",
-                    DueDate = 'None',
+                    DueDate = "None",
                     Quadrant = 2,
                     CategoryID = 4,
                     Completed = false
