@@ -8,11 +8,6 @@ namespace Mission6.Models
 {
     public class TaskResponse
     {
-//        @*Task(Required)
-//• Due Date
-//• Quadrant(Required)
-//• Category(Dropdown containing options: Home, School, Work, Church)
-//• Completed(True/False)*@
 
         [Key]
         [Required]
