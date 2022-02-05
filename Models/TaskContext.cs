@@ -29,7 +29,7 @@ namespace Mission6.Models
                 {
                     TaskID = 1,
                     TaskName = "Mission6 Assignment",
-                    DueDate = '02/09/22',
+                    DueDate = "02/09/22",
                     Quadrant = 1,
                     CategoryID = 2,
                     Completed = false

@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Mission6.Models;
 
 namespace Mission6
 {
@@ -24,6 +26,10 @@ namespace Mission6
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<TaskContext>(options =>
+            {
+                options.UseSqlite(Configuration["ConnectionStrings:BlahConnection"]);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +42,6 @@ namespace Mission6
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -46,6 +51,7 @@ namespace Mission6
 
             app.UseAuthorization();
 
+            // Endpoints passing data for CRUD functionality
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
