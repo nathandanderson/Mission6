@@ -12,6 +12,10 @@ namespace Mission6.Controllers
     public class HomeController : Controller
     {
         private TaskContext blahContext { get; set; }
+        public HomeController(TaskContext someName)
+        {
+            blahContext = someName;
+        }
 
         public IActionResult Index()
         {
@@ -54,10 +58,10 @@ namespace Mission6.Controllers
         [HttpGet]
         public IActionResult TaskList()
         {
-            var tasks = blahContext.Responses
-                .Include(x => x.Category)
-                .OrderBy(x => x.Title)
-                .ToList();
+            //var tasks = blahContext.Responses
+            //    .Include(x => x.Category)
+            //    .OrderBy(x => x.Title)
+            //    .ToList();
 
             return View(tasks);
         }
