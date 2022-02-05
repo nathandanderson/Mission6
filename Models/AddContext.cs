@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Mission6.Models
 {
-    public class Add
+    public class AddContext
     {
     }
 }
