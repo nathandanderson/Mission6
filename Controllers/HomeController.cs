@@ -17,5 +17,16 @@ namespace Mission6.Controllers
             return View();
         }
 
+        public IActionResult Confirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult NewTask()
+        {
+            return View();
+        }
+
     }
 }
