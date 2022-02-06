@@ -12,12 +12,10 @@ namespace Mission6.Controllers
 {
     public class HomeController : Controller
     {
-        private TaskContext daContext { get; set; }
-
-        // Constructor
+        private TaskContext blahContext { get; set; }
         public HomeController(TaskContext someName)
         {
-            daContext = someName;
+            blahContext = someName;
         }
 
         public IActionResult Index()
