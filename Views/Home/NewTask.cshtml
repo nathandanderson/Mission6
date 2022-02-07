@@ -2,7 +2,7 @@
     ViewData["Title"] = "Movie Input";
 }
 
-@*@model Mission6.Models.*@
+@model Mission6.Models.TaskResponse
 
 <h1>Fill out a Task Here</h1>
 
@@ -33,6 +33,10 @@
             <option value="false">False</option>
         </select><br />
 
-        <button type="submit">Submit Movie</button>
+        <button type="submit">Submit Task</button>
     </form>
+    <br />
+    <div>
+        <a asp-controller="Home" asp-action="Index" class="btn">Back to Quadrant</a>
+    </div>
 </div>
