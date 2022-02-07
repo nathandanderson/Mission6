@@ -56,16 +56,16 @@ namespace Mission6.Controllers
             return View("Confirmation", nt);
         }
 
-        [HttpGet]
-        public IActionResult TaskList()
-        {
+        //[HttpGet]
+       // public IActionResult TaskList()
+        //{
             //var tasks = blahContext.Responses
             //    .Include(x => x.Category)
             //    .OrderBy(x => x.Title)
             //    .ToList();
 
-            return View(tasks);
-        }
+            //return View(tasks);
+        //}
 
     }
 }
