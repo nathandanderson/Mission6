@@ -59,12 +59,50 @@ namespace Mission6.Controllers
         [HttpGet]
         public IActionResult TaskList()
         {
-            //var tasks = blahContext.Responses
-            //    .Include(x => x.Category)
-            //    .OrderBy(x => x.Title)
-            //    .ToList();
+            var tasks = blahContext.Responses
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
 
             return View(tasks);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int TaskID)
+        {
+            ViewBag.Categories = blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
+
+            var task = blahContext.Responses.Single(x => x.TaskID ==TaskID);
+
+            return View("NewTask", task);
+        }
+        // Saving the edits they made on the edit page.
+        [HttpPost]
+        public IActionResult Edit(TaskResponse blah)
+        {
+            blahContext.Update(blah);
+            blahContext.SaveChanges();
+
+            return RedirectToAction("TaskList");
+        }
+
+        //Render the delete page for a given movie
+        [HttpGet]
+        public IActionResult Delete(int TaskID)
+        {
+            var task = blahContext.Responses.Single(x => x.TaskID == TaskID);
+
+            return View(task);
+        }
+
+        //Actually delete the movie after asking for confirmation
+        [HttpPost]
+        public IActionResult Delete(TaskResponse tr)
+        {
+            blahContext.Responses.Remove(tr);
+            blahContext.SaveChanges();
+
+            return RedirectToAction("TaskList");
         }
 
     }
