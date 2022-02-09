@@ -2,37 +2,96 @@
     ViewData["Title"] = "Quadrants Page";
 }
 
+@model List<Mission6.Models.Task>
+
 <div class="text-center">
     <div class="container text-center">
         <div class="row">
-            <div class="col-12"><h3>Stephen Covey's Time Management Matrix</h3></div>
+            <div class="col-12"><h2>Our Task Time Management Matrix</h2></div>
         </div>
+        <!-- This row is just a header, no data in here -->
         <div class="row">
-            <div class="col-1"></div>
+            <div class="col-2"></div>
             <div class="col-5">
-                <h4>Urgent</h4>
+                <h3>Urgent</h3>
             </div>
             <div class="col-5">
-                <h4>Not Urgent</h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-1" style="transform: rotate(-90deg);"><h4>Important</h4></div>
-            <div class="col-5">
-                <h6>Quadrant 1</h6>
-            </div>
-            <div class="col-5">
-                <h6>Quadrant 2</h6>
+                <h3>Not Urgent</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col-1" style="transform: rotate(-90deg);"><h4>Not Important</h4></div>
+
+        <!--........................................................-->
+        <!--Quadrants 1 and 2-->
+        <div class="row" style="min-height: 100px; ">
+            <div class="col-2"><h4>Important</h4></div>
             <div class="col-5">
-                <h6>Quadrant 3</h6>
+                <h5>Quadrant 1</h5>
+                @foreach (var t1 in Model)
+                {
+                    if (t1.Quadrant == 1)
+                    {
+                        <div class="task-node">
+                            <span>@t1.TaskName</span>
+                            <a asp-controller="Home" asp-action="Edit" asp-route-taskid="@t1.TaskID">Update</a>
+                            <a asp-controller="Home" asp-action="Delete" asp-route-taskid="@t1.TaskID">Delete</a>
+                        </div>
+                    }
+
+                }
             </div>
+
+
             <div class="col-5">
-                <h6>Quadrant 4</h6>
+                <h5>Quadrant 2</h5>
+                @foreach (var t2 in Model)
+                {
+                    if (t2.Quadrant == 2)
+                    {
+                        <div class="task-node">
+                            <span>@t2.TaskName</span>
+                            <a asp-controller="Home" asp-action="Edit" asp-route-taskid="@t2.TaskID">Update</a>
+                            <a asp-controller="Home" asp-action="Delete" asp-route-taskid="@t2.TaskID">Delete</a>
+                        </div>
+                    }
+
+                }
             </div>
+        </div>
+                
+        <div class="row" style="height: fit-content;">
+            <div class="col-2"><h4>Not Important</h4></div>
+            <div class="col-5">
+                <h5>Quadrant 3</h5>
+                @foreach (var t3 in Model)
+                {
+                    if (t3.Quadrant == 3)
+                    {
+                        <div class="task-node">
+                            <span>@t3.TaskName</span>
+                            <a asp-controller="Home" asp-action="Edit" asp-route-taskid="@t3.TaskID">Update</a>
+                            <a asp-controller="Home" asp-action="Delete" asp-route-taskid="@t3.TaskID">Delete</a>
+                        </div>
+                    }
+                }
+            </div>
+
+
+
+            <div class="col-5">
+                <h5>Quadrant 4</h5>
+                @foreach (var t4 in Model)
+                {
+                    if (t4.Quadrant == 4)
+                    {
+                        <div class="task-node">
+                            <span>@t4.TaskName</span>
+                            <a asp-controller="Home" asp-action="Edit" asp-route-taskid="@t4.TaskID">Update</a>
+                            <a asp-controller="Home" asp-action="Delete" asp-route-taskid="@t4.TaskID">Delete</a>
+                        </div>
+                    }
+                }
+            </div>
+                
         </div>
     </div>
 </div>
