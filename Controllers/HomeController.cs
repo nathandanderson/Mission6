@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+//using System.Threading.Tasks.Task;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mission6.Controllers
@@ -40,28 +40,29 @@ namespace Mission6.Controllers
 
         //Posting form information page
         [HttpPost]
-        public IActionResult newTask(Task nt)
+        public IActionResult NewTask(Task nt)
         {
             if (ModelState.IsValid)
             {
                 //writing to sql database and saving
                 blahContext.Add(nt);
                 blahContext.SaveChanges();
+
+                return View("Quadrants", nt);
             }
             else
             {
                 ViewBag.Categories= blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
                 return View(nt);
             }
-            return View("Confirmation", nt);
         }
 
         [HttpGet]
         public IActionResult TaskList()
         {
-            var tasks = blahContext.Responses
+            var tasks = blahContext.Entries
                 .Include(x => x.Category)
-                .OrderBy(x => x.Title)
+                .OrderBy(x => x.TaskName)
                 .ToList();
 
             return View(tasks);
@@ -72,25 +73,25 @@ namespace Mission6.Controllers
         {
             ViewBag.Categories = blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
 
-            var task = blahContext.Responses.Single(x => x.TaskID ==TaskID);
+            var task = blahContext.Entries.Single(x => x.TaskID ==TaskID);
 
             return View("NewTask", task);
         }
         // Saving the edits they made on the edit page.
         [HttpPost]
-        public IActionResult Edit(TaskResponse blah)
+        public IActionResult Edit(Task blah)
         {
             blahContext.Update(blah);
             blahContext.SaveChanges();
 
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Quadrants");
         }
 
         //Render the delete page for a given movie
         [HttpGet]
         public IActionResult Delete(int TaskID)
         {
-            var task = blahContext.Responses.Single(x => x.TaskID == TaskID);
+            var task = blahContext.Entries.Single(x => x.TaskID == TaskID);
 
             return View(task);
         }
@@ -104,9 +105,9 @@ namespace Mission6.Controllers
 
         //Actually delete the movie after asking for confirmation
         [HttpPost]
-        public IActionResult Delete(TaskResponse tr)
+        public IActionResult Delete(Task tr)
         {
-            blahContext.Responses.Remove(tr);
+            blahContext.Entries.Remove(tr);
             blahContext.SaveChanges();
 
             return RedirectToAction("TaskList");
