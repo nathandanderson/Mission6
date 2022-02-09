@@ -18,12 +18,12 @@
         <label asp-for="Quadrant">Quadrant:</label>
         <input asp-for="Quadrant" /><br />
 
-        <label asp-for="CategoryId">Category:</label>
-        <select asp-for="CategoryId">
+        <label asp-for="CategoryID">Category:</label>
+        <select asp-for="CategoryID">
             <option value="">Select a Category</option>
             @foreach (Category c in ViewBag.Categories)
             {
-            <option value="@c.CategoryId">@c.CategoryName</option>
+            <option value="@c.CategoryID">@c.CategoryName</option>
             }
         </select>
 

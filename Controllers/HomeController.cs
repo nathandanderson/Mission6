@@ -104,9 +104,9 @@ namespace Mission6.Controllers
 
         //Actually delete the movie after asking for confirmation
         [HttpPost]
-        public IActionResult Delete(TaskResponse tr)
+        public IActionResult Delete(TasksResponse nt)
         {
-            blahContext.Entries.Remove(tr);
+            blahContext.Entries.Remove(nt);
             blahContext.SaveChanges();
 
             return RedirectToAction("TaskList");
