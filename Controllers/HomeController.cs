@@ -40,7 +40,7 @@ namespace Mission6.Controllers
 
         //Posting form information page
         [HttpPost]
-        public IActionResult newTask(TasksResponse nt)
+        public IActionResult NewTask(TasksResponse nt)
         {
             if (ModelState.IsValid)
             {
