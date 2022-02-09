@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+//using System.Threading.Tasks.Task;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mission6.Controllers
@@ -48,14 +48,13 @@ namespace Mission6.Controllers
                 blahContext.Add(nt);
                 blahContext.SaveChanges();
 
-                return View("Quandrants", nt);
+                return View("Quadrants", nt);
             }
             else
             {
                 ViewBag.Categories= blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
                 return View(nt);
             }
-            return View("Quadrants", nt);
         }
 
         [HttpGet]
@@ -80,7 +79,7 @@ namespace Mission6.Controllers
         }
         // Saving the edits they made on the edit page.
         [HttpPost]
-        public IActionResult Edit(TasksResponse blah)
+        public IActionResult Edit(Task blah)
         {
             blahContext.Update(blah);
             blahContext.SaveChanges();
@@ -106,7 +105,7 @@ namespace Mission6.Controllers
 
         //Actually delete the movie after asking for confirmation
         [HttpPost]
-        public IActionResult Delete(TasksResponse tr)
+        public IActionResult Delete(Task tr)
         {
             blahContext.Entries.Remove(tr);
             blahContext.SaveChanges();

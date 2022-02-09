@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using static Mission6.Models.TasksResponse;
+using static Mission6.Models.Task;
 
 namespace Mission6.Models
 {
@@ -11,7 +11,7 @@ namespace Mission6.Models
             // leave blank for now
         }
 
-        public DbSet<TasksResponse> Entries { get; set; }
+        public DbSet<Task> Entries { get; set; }
         public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
@@ -23,9 +23,9 @@ namespace Mission6.Models
                 new Category { CategoryID = 4, CategoryName = "Church" }
             );
 
-            mb.Entity<TasksResponse>().HasData(
+            mb.Entity<Task>().HasData(
 
-                new TasksResponse
+                new Task
                 {
                     TaskID = 1,
                     TaskName = "Mission6 Assignment",
@@ -35,7 +35,7 @@ namespace Mission6.Models
                     Completed = false
                 },
 
-                new TasksResponse
+                new Task
                 {
                     TaskID = 2,
                     TaskName = "Laundry",
@@ -45,7 +45,7 @@ namespace Mission6.Models
                     Completed = false
                 },
 
-                new TasksResponse
+                new Task
                 {
                     TaskID = 3,
                     TaskName = "Respond to emails",
@@ -55,7 +55,7 @@ namespace Mission6.Models
                     Completed = false
                 },
 
-                new TasksResponse
+                new Task
                 {
                     TaskID = 4,
                     TaskName = "Relationship Building",
