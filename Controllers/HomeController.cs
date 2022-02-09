@@ -40,13 +40,15 @@ namespace Mission6.Controllers
 
         //Posting form information page
         [HttpPost]
-        public IActionResult newTask(Task nt)
+        public IActionResult NewTask(Task nt)
         {
             if (ModelState.IsValid)
             {
                 //writing to sql database and saving
                 blahContext.Add(nt);
                 blahContext.SaveChanges();
+
+                return View("Quandrants", nt);
             }
             else
             {
@@ -78,7 +80,7 @@ namespace Mission6.Controllers
         }
         // Saving the edits they made on the edit page.
         [HttpPost]
-        public IActionResult Edit(TaskResponse blah)
+        public IActionResult Edit(TasksResponse blah)
         {
             blahContext.Update(blah);
             blahContext.SaveChanges();
