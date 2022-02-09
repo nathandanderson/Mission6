@@ -40,7 +40,7 @@ namespace Mission6.Controllers
 
         //Posting form information page
         [HttpPost]
-        public IActionResult newTask(Task nt)
+        public IActionResult newTask(TasksResponse nt)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Mission6.Controllers
         }
         // Saving the edits they made on the edit page.
         [HttpPost]
-        public IActionResult Edit(TaskResponse blah)
+        public IActionResult Edit(TasksResponse blah)
         {
             blahContext.Update(blah);
             blahContext.SaveChanges();
