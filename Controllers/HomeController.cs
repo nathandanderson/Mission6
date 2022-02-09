@@ -58,7 +58,7 @@ namespace Mission6.Controllers
         }
 
         [HttpGet]
-        public IActionResult TaskList()
+        public IActionResult Quadrants()
         {
             var tasks = blahContext.Entries
                 .Include(x => x.Category)
@@ -96,13 +96,6 @@ namespace Mission6.Controllers
             return View(task);
         }
 
-
-        public IActionResult Quadrants()
-        {
-            return View();
-        }
-
-
         //Actually delete the movie after asking for confirmation
         [HttpPost]
         public IActionResult Delete(Task tr)
@@ -110,7 +103,7 @@ namespace Mission6.Controllers
             blahContext.Entries.Remove(tr);
             blahContext.SaveChanges();
 
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Quadrants");
         }
 
     }
