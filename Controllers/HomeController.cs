@@ -95,6 +95,13 @@ namespace Mission6.Controllers
             return View(task);
         }
 
+
+        public IActionResult Quadrants()
+        {
+            return View();
+        }
+
+
         //Actually delete the movie after asking for confirmation
         [HttpPost]
         public IActionResult Delete(TaskResponse tr)
