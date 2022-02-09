@@ -59,9 +59,9 @@ namespace Mission6.Controllers
         [HttpGet]
         public IActionResult TaskList()
         {
-            var tasks = blahContext.Responses
+            var tasks = blahContext.Entries
                 .Include(x => x.Category)
-                .OrderBy(x => x.Title)
+                .OrderBy(x => x.TaskName)
                 .ToList();
 
             return View(tasks);
@@ -72,7 +72,7 @@ namespace Mission6.Controllers
         {
             ViewBag.Categories = blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
 
-            var task = blahContext.Responses.Single(x => x.TaskID ==TaskID);
+            var task = blahContext.Entries.Single(x => x.TaskID ==TaskID);
 
             return View("NewTask", task);
         }
@@ -90,7 +90,7 @@ namespace Mission6.Controllers
         [HttpGet]
         public IActionResult Delete(int TaskID)
         {
-            var task = blahContext.Responses.Single(x => x.TaskID == TaskID);
+            var task = blahContext.Entries.Single(x => x.TaskID == TaskID);
 
             return View(task);
         }
@@ -99,7 +99,7 @@ namespace Mission6.Controllers
         [HttpPost]
         public IActionResult Delete(TaskResponse tr)
         {
-            blahContext.Responses.Remove(tr);
+            blahContext.Entries.Remove(tr);
             blahContext.SaveChanges();
 
             return RedirectToAction("TaskList");
