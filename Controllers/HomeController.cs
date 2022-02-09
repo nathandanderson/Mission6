@@ -6,16 +6,16 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Mission6.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private TaskContext blahContext { get; set; }
+        public HomeController(TaskContext someName)
         {
-            _logger = logger;
+            blahContext = someName;
         }
 
         public IActionResult Index()
@@ -23,20 +23,94 @@ namespace Mission6.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Confirmation()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+
+        //Display page for new Task Form
+        [HttpGet]
+        public IActionResult NewTask()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ViewBag.Categories = blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
+
+            return View();
         }
+
+        //Posting form information page
+        [HttpPost]
+        public IActionResult newTask(Task nt)
+        {
+            if (ModelState.IsValid)
+            {
+                //writing to sql database and saving
+                blahContext.Add(nt);
+                blahContext.SaveChanges();
+            }
+            else
+            {
+                ViewBag.Categories= blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
+                return View(nt);
+            }
+            return View("Confirmation", nt);
+        }
+
+        [HttpGet]
+        public IActionResult TaskList()
+        {
+            var tasks = blahContext.Responses
+                .Include(x => x.Category)
+                .OrderBy(x => x.Title)
+                .ToList();
+
+            return View(tasks);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int TaskID)
+        {
+            ViewBag.Categories = blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
+
+            var task = blahContext.Responses.Single(x => x.TaskID ==TaskID);
+
+            return View("NewTask", task);
+        }
+        // Saving the edits they made on the edit page.
+        [HttpPost]
+        public IActionResult Edit(TaskResponse blah)
+        {
+            blahContext.Update(blah);
+            blahContext.SaveChanges();
+
+            return RedirectToAction("TaskList");
+        }
+
+        //Render the delete page for a given movie
+        [HttpGet]
+        public IActionResult Delete(int TaskID)
+        {
+            var task = blahContext.Responses.Single(x => x.TaskID == TaskID);
+
+            return View(task);
+        }
+
 
         public IActionResult Quadrants()
         {
             return View();
         }
+
+
+        //Actually delete the movie after asking for confirmation
+        [HttpPost]
+        public IActionResult Delete(TaskResponse tr)
+        {
+            blahContext.Responses.Remove(tr);
+            blahContext.SaveChanges();
+
+            return RedirectToAction("TaskList");
+        }
+
     }
 }
