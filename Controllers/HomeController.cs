@@ -48,7 +48,8 @@ namespace Mission6.Controllers
                 blahContext.Add(nt);
                 blahContext.SaveChanges();
 
-                return View("Quadrants", nt);
+                return RedirectToAction("Quadrants");
+                //return View("Quadrants", nt);
             }
             else
             {

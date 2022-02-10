@@ -5,12 +5,12 @@
 @model List<Mission6.Models.Task>
 
 <div class="text-center">
-    <div class="container text-center">
-        <div class="row">
+    <div class="container text-center" style="padding-bottom:30px;">
+        <div class="row" style="padding-bottom: 25px;">
             <div class="col-12"><h2>Our Task Time Management Matrix</h2></div>
         </div>
         <!-- This row is just a header, no data in here -->
-        <div class="row">
+        <div class="row" style="padding-bottom: 25px;">
             <div class="col-2"></div>
             <div class="col-5">
                 <h3>Urgent</h3>
@@ -22,9 +22,9 @@
 
         <!--........................................................-->
         <!--Quadrants 1 and 2-->
-        <div class="row" style="min-height: 100px; ">
-            <div class="col-2"><h4>Important</h4></div>
-            <div class="col-5">
+        <div class="row" style="min-height: 150px; ">
+            <div class="col-2" style="display:flex; align-items:center; justify-content:center;"><h4>Important</h4></div>
+            <div class="col-5" style="border: solid 1px black;">
                 <h5>Quadrant 1</h5>
                 @foreach (var t1 in Model)
                 {
@@ -41,7 +41,7 @@
             </div>
 
 
-            <div class="col-5">
+            <div class="col-5" style="border: solid 1px black;">
                 <h5>Quadrant 2</h5>
                 @foreach (var t2 in Model)
                 {
@@ -58,9 +58,9 @@
             </div>
         </div>
                 
-        <div class="row" style="height: fit-content;">
-            <div class="col-2"><h4>Not Important</h4></div>
-            <div class="col-5">
+        <div class="row" style="min-height:150px;">
+            <div class="col-2" style="display:flex; align-items:center; justify-content:center;"><h4>Not Important</h4></div>
+            <div class="col-5" style="border: solid 1px black;">
                 <h5>Quadrant 3</h5>
                 @foreach (var t3 in Model)
                 {
@@ -77,7 +77,7 @@
 
 
 
-            <div class="col-5">
+            <div class="col-5" style="border: solid 1px black;">
                 <h5>Quadrant 4</h5>
                 @foreach (var t4 in Model)
                 {
