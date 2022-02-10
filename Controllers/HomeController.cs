@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
+//using System.Threading.Tasks.Task;
 using Microsoft.EntityFrameworkCore;
 
 namespace Mission6.Controllers
@@ -40,24 +40,25 @@ namespace Mission6.Controllers
 
         //Posting form information page
         [HttpPost]
-        public IActionResult newTask(Task nt)
+        public IActionResult NewTask(Task nt)
         {
             if (ModelState.IsValid)
             {
                 //writing to sql database and saving
                 blahContext.Add(nt);
                 blahContext.SaveChanges();
+
+                return View("Quadrants", nt);
             }
             else
             {
                 ViewBag.Categories= blahContext.Categories.OrderBy(x => x.CategoryName).ToList();
                 return View(nt);
             }
-            return View("Confirmation", nt);
         }
 
         [HttpGet]
-        public IActionResult TaskList()
+        public IActionResult Quadrants()
         {
             var tasks = blahContext.Entries
                 .Include(x => x.Category)
@@ -78,12 +79,12 @@ namespace Mission6.Controllers
         }
         // Saving the edits they made on the edit page.
         [HttpPost]
-        public IActionResult Edit(TaskResponse blah)
+        public IActionResult Edit(Task blah)
         {
             blahContext.Update(blah);
             blahContext.SaveChanges();
 
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Quadrants");
         }
 
         //Render the delete page for a given movie
@@ -97,12 +98,12 @@ namespace Mission6.Controllers
 
         //Actually delete the movie after asking for confirmation
         [HttpPost]
-        public IActionResult Delete(TasksResponse tr)
+        public IActionResult Delete(Task tr)
         {
             blahContext.Entries.Remove(tr);
             blahContext.SaveChanges();
 
-            return RedirectToAction("TaskList");
+            return RedirectToAction("Quadrants");
         }
 
     }

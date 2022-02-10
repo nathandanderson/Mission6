@@ -2,32 +2,33 @@
     ViewData["Title"] = "Movie Input";
 }
 
-@model Mission6.Models.TaskResponse
+@model Mission6.Models.Task
 
 <h1>Fill out a Task Here</h1>
 
 <div>
     <form method="post">
+        <div asp-validation-summary="All"></div>
 
-        <label asp-for="Task">Task:</label>
-        <input asp-for="Task" /><br />
+        <label>Task:</label>
+        <input asp-for="TaskName" /><br />
 
-        <label asp-for="DueDate">Due Date:</label>
+        <label>Due Date:</label>
         <input asp-for="DueDate" /><br />
 
-        <label asp-for="Quadrant">Quadrant:</label>
+        <label>Quadrant:</label>
         <input asp-for="Quadrant" /><br />
 
-        <label asp-for="CategoryId">Category:</label>
-        <select asp-for="CategoryId">
+        <label>Category:</label>
+        <select asp-for="CategoryID">
             <option value="">Select a Category</option>
             @foreach (Category c in ViewBag.Categories)
             {
-            <option value="@c.CategoryId">@c.CategoryName</option>
+                <option value="@c.CategoryID">@c.CategoryName</option>
             }
         </select>
 
-        <label asp-for="Completed">Completed:</label>
+        <label>Completed:</label>
         <select asp-for="Completed">
             <option value="true">True</option>
             <option value="false">False</option>
@@ -37,6 +38,6 @@
     </form>
     <br />
     <div>
-        <a asp-controller="Home" asp-action="Index" class="btn">Back to Quadrant</a>
+        <a asp-controller="Home" asp-action="Quadrants" class="btn">Back to Quadrant</a>
     </div>
 </div>
